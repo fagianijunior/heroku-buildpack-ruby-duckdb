@@ -40,7 +40,8 @@ export_env_dir $ENV_DIR
 
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
-mkdir -p $BUILD_DIR/.heroku
+mkdir -p $BUILD_DIR/.heroku/include
+mkdir -p $BUILD_DIR/.heroku/lib
 
 # Download DuckDB C++ package
 DUCKDB_PACKAGE_URL="https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip"
@@ -49,16 +50,14 @@ curl -L $DUCKDB_PACKAGE_URL -o duckdb_package.zip
 
 # Extract DuckDB files
 unzip duckdb_package.zip -d duckdb_package
-cp duckdb_package/duckdb.* /usr/local/include/
-cp duckdb_package/libduckdb.so /usr/local/lib
+cp duckdb_package/duckdb.h $BUILD_DIR/.heroku/include/
+cp duckdb_package/duckdb.hpp $BUILD_DIR/.heroku/include/
+cp duckdb_package/libduckdb.so $BUILD_DIR/.heroku/lib/
 rm -rf duckdb_package duckdb_package.zip
 
 # Set up environment variables for the DuckDB gem
-echo "export DUCKDB_INCLUDE=/usr/local/include" >> $BUILD_DIR/.profile.d/duckdb.sh
-echo "export DUCKDB_LIB=/usr/local/lib" >> $BUILD_DIR/.profile.d/duckdb.sh
-echo 'export PATH="$PATH:/usr/local/lib"' >> $BUILD_DIR/.profile.d/duckdb.sh
-
-# echo "export DUCKDB_LIB=$BUILD_DIR/.heroku/lib" >> $BUILD_DIR/.profile.d/duckdb.sh
-# echo 'export PATH="$PATH:${HOME}/.heroku/lib"' >> $BUILD_DIR/.profile.d/duckdb.sh
+echo "export DUCKDB_INCLUDE=$BUILD_DIR/.heroku/include" >> $BUILD_DIR/.profile.d/duckdb.sh
+echo "export DUCKDB_LIB=$BUILD_DIR/.heroku/lib" >> $BUILD_DIR/.profile.d/duckdb.sh
+echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_DIR/.heroku/lib"' >> $BUILD_DIR/.profile.d/duckdb.sh
 
 echo "Installation successful" | output
