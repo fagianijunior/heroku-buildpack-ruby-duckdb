@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
+set -e
+
 header() {
   echo "" || true
   echo "-----> $*" || true
@@ -50,6 +52,7 @@ curl -L $DUCKDB_PACKAGE_URL -o duckdb_package.zip
 # Extract DuckDB files
 unzip duckdb_package.zip -d duckdb_package
 cp duckdb_package/duckdb /usr/local/bin/
+chmod +x /usr/local/bin/duckdb
 cp duckdb_package/duckdb.* /usr/local/include/
 cp duckdb_package/libduckdb.so /usr/local/lib
 rm -rf duckdb_package duckdb_package.zip
