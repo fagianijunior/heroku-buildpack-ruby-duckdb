@@ -9,10 +9,13 @@ curl -L $DOWNLOAD_URL -o /tmp/duckdb.zip
 
 # Unzip and move to bin
 unzip /tmp/duckdb.zip -d /tmp/
-mkdir -p $BUILD_DIR/.heroku/bin
-mv /tmp/duckdb $BUILD_DIR/.heroku/bin/
+mkdir -p $BUILD_DIR/bin
+mv /tmp/duckdb $BUILD_DIR/bin/
 
 # Make sure the binary is executable
-chmod +x $BUILD_DIR/.heroku/bin/duckdb
+chmod +x $BUILD_DIR/bin/duckdb
+
+# Add DuckDB to PATH for future build steps
+echo "export PATH=\"$BUILD_DIR/bin:\$PATH\"" > $BUILD_DIR/.profile.d/duckdb.sh
 
 echo "-----> DuckDB installation completed"
