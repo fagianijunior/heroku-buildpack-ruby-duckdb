@@ -58,6 +58,6 @@ rm -rf duckdb_package duckdb_package.zip
 # Set up environment variables for the DuckDB gem
 echo "export DUCKDB_INCLUDE=$BUILD_DIR/.heroku/include" >> $BUILD_DIR/.profile.d/duckdb.sh
 echo "export DUCKDB_LIB=$BUILD_DIR/.heroku/lib" >> $BUILD_DIR/.profile.d/duckdb.sh
-echo 'export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$BUILD_DIR/.heroku/lib"' >> $BUILD_DIR/.profile.d/duckdb.sh
+echo 'export LD_LIBRARY_PATH="$BUILD_DIR/.heroku/lib:$LD_LIBRARY_PATH"' >> $BUILD_DIR/.profile.d/duckdb.sh
 
 echo "Installation successful" | output
