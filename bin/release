@@ -1,0 +1,2 @@
+#!/bin/sh
+echo "-----> Release phase for DuckDB"
