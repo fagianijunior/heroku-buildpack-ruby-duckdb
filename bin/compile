@@ -42,12 +42,8 @@ export_env_dir $ENV_DIR
 
 cd $BUILD_DIR
 mkdir -p $VENDOR_DIR
-
-# BUNDLE_PATH=vendor/bundle BUNDLE_BIN=vendor/bundle/bin
-# Set GEM_HOME and BUNDLE_PATH to the same directory
-export GEM_HOME=$BUILD_DIR/$VENDOR_DIR
-export BUNDLE_PATH=$GEM_HOME
-export BUNDLE_BIN=$GEM_HOME/bin
+mkdir -p $BUILD_DIR/.heroku/include
+mkdir -p $BUILD_DIR/.heroku/lib
 
 # Download DuckDB C++ package
 DUCKDB_PACKAGE_URL="https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip"
@@ -56,10 +52,17 @@ curl -L $DUCKDB_PACKAGE_URL -o libduckdb.zip
 
 # Extract DuckDB files
 unzip libduckdb.zip -d libduckdb
-cp libduckdb/duckdb.* $VENDOR_DIR/
-cp libduckdb/libduckdb.so $VENDOR_DIR/
+cp libduckdb/duckdb.h $BUILD_DIR/.heroku/include/
+cp libduckdb/duckdb.hpp $BUILD_DIR/.heroku/include/
+cp libduckdb/libduckdb.so $BUILD_DIR/.heroku/lib/
 
-# Install the DuckDB gem
-gem install duckdb -- --with-duckdb-include=$BUILD_DIR/$VENDOR_DIR --with-duckdb-lib=$BUILD_DIR/$VENDOR_DIR
+# Set up environment variables for the DuckDB gem
+export DUCKDB_INCLUDE=$BUILD_DIR/.heroku/include
+export DUCKDB_LIB=$BUILD_DIR/.heroku/lib
+export GEM_HOME=$BUILD_DIR/$VENDOR_DIR
+export BUNDLE_PATH=$BUILD_DIR/$VENDOR_DIR
+
+# Ensure the DuckDB gem knows where to find the headers and library
+gem install duckdb -- --with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB
 
 echo "Installation successful" | output
