@@ -47,13 +47,12 @@ mkdir -p $BUILD_DIR/.heroku
 # Download DuckDB C++ package
 DUCKDB_PACKAGE_URL="https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip"
 echo "Downloading $DUCKDB_PACKAGE_URL" | output
-curl -L $DUCKDB_PACKAGE_URL -o duckdb_package.zip
+curl -L $DUCKDB_PACKAGE_URL -o libduckdb.zip
 
 # Extract DuckDB files
-unzip duckdb_package.zip -d duckdb_package
-# cp duckdb_package/duckdb /usr/local/bin/
-# chmod +x /usr/local/bin/duckdb
-# cp duckdb_package/duckdb.* /usr/local/include/
-# cp duckdb_package/libduckdb.so /usr/local/lib
+unzip libduckdb.zip -d libduckdb
+cp libduckdb/duckdb.* /usr/local/include/
+cp libduckdb/libduckdb.so /usr/local/lib/
+ldconfig /usr/local/lib
 
 echo "Installation successful" | output
