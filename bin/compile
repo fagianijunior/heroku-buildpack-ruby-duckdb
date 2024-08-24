@@ -53,7 +53,6 @@ curl -L $DUCKDB_PACKAGE_URL -o libduckdb.zip
 unzip libduckdb.zip -d libduckdb
 cp libduckdb/duckdb.* $VENDOR_DIR/
 cp libduckdb/libduckdb.so $VENDOR_DIR/
-ldconfig -v | grep libduckdb
 gem install duckdb -- --with-duckdb-include=$BUILD_DIR/$VENDOR_DIR --with-duckdb-lib=$BUILD_DIR/$VENDOR_DIR
 
 echo "Installation successful" | output
