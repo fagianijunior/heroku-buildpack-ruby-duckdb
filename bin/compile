@@ -51,15 +51,9 @@ curl -L $DUCKDB_PACKAGE_URL -o duckdb_package.zip
 
 # Extract DuckDB files
 unzip duckdb_package.zip -d duckdb_package
-cp duckdb_package/duckdb /usr/local/bin/
-chmod +x /usr/local/bin/duckdb
-cp duckdb_package/duckdb.* /usr/local/include/
-cp duckdb_package/libduckdb.so /usr/local/lib
-rm -rf duckdb_package duckdb_package.zip
-
-# Set up environment variables for the DuckDB gem
-# echo "export DUCKDB_INCLUDE=$BUILD_DIR/.heroku/include" >> $BUILD_DIR/.profile.d/duckdb.sh
-# echo "export DUCKDB_LIB=$BUILD_DIR/.heroku/lib" >> $BUILD_DIR/.profile.d/duckdb.sh
-# echo 'export PATH="$PATH:${HOME}/.heroku/lib"' >> $BUILD_DIR/.profile.d/duckdb.sh
+# cp duckdb_package/duckdb /usr/local/bin/
+# chmod +x /usr/local/bin/duckdb
+# cp duckdb_package/duckdb.* /usr/local/include/
+# cp duckdb_package/libduckdb.so /usr/local/lib
 
 echo "Installation successful" | output
