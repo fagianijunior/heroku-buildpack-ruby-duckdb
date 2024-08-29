@@ -39,9 +39,8 @@ ENV_DIR=$3
 BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
 DUCKDB_VERSION="1.0.0"
 
-
-export BUNDLE_PATH=$GEM_HOME
-export DUCKDB_DIR=$BUILDPACK_DIR/.duckdb
+DEST_DIR="app/vendor/duckdb"
+export DUCKDB_DIR=$DEST_DIR
 export DUCKDB_LIB=$DUCKDB_DIR/lib
 export DUCKDB_INCLUDE=$DUCKDB_DIR/include
 export_env_dir $ENV_DIR
