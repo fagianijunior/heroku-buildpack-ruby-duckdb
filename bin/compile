@@ -61,9 +61,10 @@ cp libduckdb/libduckdb.so $DUCKDB_LIB/
 # Create .profile.d directory if it doesn't exist
 mkdir -p $BUILD_DIR/.profile.d
 
+export BUNDLE_BUILD__DUCKDB="--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
 # Export DUCKDB_LIB and DUCKDB_INCLUDE for future steps
 cat <<EOF > $BUILD_DIR/.profile.d/duckdb.sh
-export BUNDLE_BUILD__DUCKDB="--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
+export BUNDLE_BUILD__DUCKDB="$BUNDLE_BUILD__DUCKDB"
 EOF
 
 
