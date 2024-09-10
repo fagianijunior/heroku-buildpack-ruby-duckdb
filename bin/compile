@@ -64,16 +64,16 @@ cp libduckdb/libduckdb.so $DUCKDB_LIB/
 # Create .profile.d directory if it doesn't exist
 mkdir -p $BUILD_DIR/.profile.d
 
-echo "---BUNDLE_BUILD__DUCKDB----" | output
-echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB" | output
-echo "Installation successful" | output
+echo "---BUNDLE_BUILD__DUCKDB----"
+echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
+echo "Installation successful"
 if [ -d "$DUCKDB_LIB" ]; then
-  echo "Directory $DUCKDB_LIB exists." | output
+  echo "Directory $DUCKDB_LIB exists."
 else
-  echo "Directory $DUCKDB_LIB does not exist." | output
+  echo "Directory $DUCKDB_LIB does not exist."
 fi
 if [ -d "$DUCKDB_INCLUDE" ]; then
-  echo "Directory $DUCKDB_INCLUDE exists." | output
+  echo "Directory $DUCKDB_INCLUDE exists."
 else
-  echo "Directory $DUCKDB_INCLUDE does not exist." | output
+  echo "Directory $DUCKDB_INCLUDE does not exist."
 fi
