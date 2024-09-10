@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
-set -xe
+set -x
 
 # Parse params
 BUILD_DIR=$1
@@ -65,9 +65,7 @@ cp libduckdb/libduckdb.so $DUCKDB_LIB/
 # Create .profile.d directory if it doesn't exist
 mkdir -p $BUILD_DIR/.profile.d
 
-export BUNDLE_BUILD__DUCKDB="--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
-
-echo "export BUNDLE_BUILD__DUCKDB=\"$BUNDLE_BUILD__DUCKDB\"" > $BUILD_DIR/.profile.d/duckdb.sh
-
+echo "---BUNDLE_BUILD__DUCKDB----"
+echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
 echo "Installation successful" | output
 echo "Installation successful"
