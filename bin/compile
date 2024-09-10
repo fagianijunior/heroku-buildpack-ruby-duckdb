@@ -74,7 +74,7 @@ touch $PROFILE_PATH
 echo "export LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LIBRARY_PATH"  >> $PROFILE_PATH
 echo "export LD_LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LD_LIBRARY_PATH"  >> $PROFILE_PATH
 echo "export INCLUDE_PATH=$ACTUAL_INSTALL_PATH/include:\$INCLUDE_PATH"  >> $PROFILE_PATH
-echo "export BUNDLE_BUILD__DUCKDB=\"--with-duckdb-include=$ACTUAL_INSTALL_PATH/include --with-duckdb-lib=$ACTUAL_INSTALL_PATH/lib\""  >> $PROFILE_PATH
+# echo "export BUNDLE_BUILD__DUCKDB=\"--with-duckdb-include=$ACTUAL_INSTALL_PATH/include --with-duckdb-lib=$ACTUAL_INSTALL_PATH/lib\""  >> $PROFILE_PATH
 chmod +x "$PROFILE_PATH"
 echo "-----> DuckDB: $PROFILE_PATH"
 cat $PROFILE_PATH
