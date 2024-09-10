@@ -7,7 +7,8 @@ set -x
 BUILD_DIR=$1
 CACHE_DIR=$2
 ENV_DIR=$3
-
+VENDOR_DIR="$BUILD_DIR/vendor"
+INSTALL_DIR="$VENDOR_DIR/duckdb"
 header() {
   echo "" || true
   echo "-----> $*" || true
@@ -42,9 +43,8 @@ BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
 DUCKDB_VERSION="1.0.0"
 
 echo "Current directory: $(pwd)"
-DEST_DIR="/app/.duckdb"
-echo "Installing DuckDB in $DEST_DIR" 
-DUCKDB_DIR=$DEST_DIR
+echo "Installing DuckDB in $INSTALL_DIR" 
+DUCKDB_DIR=$INSTALL_DIR
 DUCKDB_LIB=$DUCKDB_DIR/lib
 DUCKDB_INCLUDE=$DUCKDB_DIR/include
 export_env_dir $ENV_DIR
