@@ -41,11 +41,12 @@ header "Installing DuckDB"
 BUILDPACK_DIR=$(cd "$(dirname "$0")"; cd ..; pwd)
 DUCKDB_VERSION="1.0.0"
 
-# DEST_DIR="/app/vendor/duckdb"
-# echo "Installing DuckDB in $DEST_DIR"
-# DUCKDB_DIR=$DEST_DIR
-DUCKDB_LIB="/usr/local/lib"
-DUCKDB_INCLUDE="/usr/local/include"
+echo "Current directory: $(pwd)"
+DEST_DIR="$(pwd)/.duckdb"
+echo "Installing DuckDB in $DEST_DIR" 
+DUCKDB_DIR=$DEST_DIR
+DUCKDB_LIB=$DUCKDB_DIR/lib
+DUCKDB_INCLUDE=$DUCKDB_DIR/include
 export_env_dir $ENV_DIR
 
 mkdir -p $DUCKDB_LIB
@@ -67,6 +68,7 @@ mkdir -p $BUILD_DIR/.profile.d
 echo "---BUNDLE_BUILD__DUCKDB----"
 echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
 echo "Installation successful"
+
 if [ -d "$DUCKDB_LIB" ]; then
   echo "Directory $DUCKDB_LIB exists."
 else
