@@ -73,16 +73,15 @@ mkdir -p $(dirname $PROFILE_PATH)
 touch $PROFILE_PATH
 echo "export LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LIBRARY_PATH"  >> $PROFILE_PATH
 echo "export INCLUDE_PATH=$ACTUAL_INSTALL_PATH/include:\$INCLUDE_PATH"  >> $PROFILE_PATH
-chmod +x "$BUILD_DIR/.profile.d/duckdb.sh"
+chmod +x "$PROFILE_PATH"
+cat $PROFILE_PATH
+
+mkdir -p $ACTUAL_INSTALL_PATH/lib
+mkdir -p $ACTUAL_INSTALL_PATH/include
+cp -r $DUCKDB_LIB/* $ACTUAL_INSTALL_PATH/lib
+cp -r $DUCKDB_INCLUDE/* $ACTUAL_INSTALL_PATH/include
+
 echo "-----> DuckDB: Done"
-# ACTUAL_INSTALL_PATH="$HOME/vendor/duckdb"
-
-# mkdir -p $ACTUAL_INSTALL_PATH/lib
-# mkdir -p $ACTUAL_INSTALL_PATH/include
-
-# cp -r $DUCKDB_LIB/* $ACTUAL_INSTALL_PATH/lib
-# cp -r $DUCKDB_INCLUDE/* $ACTUAL_INSTALL_PATH/include
-
 
 # [ -d "$DUCKDB_LIB" ] && echo "Directory $DUCKDB_LIB exists." | indent || echo "Directory $DUCKDB_LIB does not exist." | indent
 # [ -d "$DUCKDB_INCLUDE" ] && echo "Directory $DUCKDB_INCLUDE exists." | indent || echo "Directory $DUCKDB_INCLUDE does not exist." | indent
