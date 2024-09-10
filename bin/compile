@@ -20,19 +20,16 @@ CACHE_DIR=$2
 ENV_DIR=$3
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 VENDOR_DIR="$BUILD_DIR/vendor"
-INSTALL_DIR="$VENDOR_DIR/duckdb"
 DUCKDB_VERSION="1.1.0"
 CACHE_FILE="$CACHE_DIR/duckdb-$DUCKDB_VERSION.tar.gz"
-DUCKDB_DIR=$INSTALL_DIR
-DUCKDB_LIB=$DUCKDB_DIR/lib
-DUCKDB_INCLUDE=$DUCKDB_DIR/include
+DUCKDB_DIR="$BUILD_DIR/vendor/duckdb"
 echo "-----> Install Duckdb"
 
 if [ ! -f $CACHE_FILE ]; then
   echo "[duckdb-buildpack] Installing DuckDB from source" | indent
 
-  mkdir -p $DUCKDB_LIB
-  mkdir -p $DUCKDB_INCLUDE
+  mkdir -p $DUCKDB_DIR/lib
+  mkdir -p $DUCKDB_DIR/include
 
   # Download DuckDB C++ package
   DUCKDB_PACKAGE_URL="https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip"
@@ -41,8 +38,9 @@ if [ ! -f $CACHE_FILE ]; then
 
   # Extract DuckDB files
   unzip libduckdb.zip -d libduckdb
-  cp libduckdb/duckdb.* $DUCKDB_INCLUDE/
-  cp libduckdb/libduckdb.so $DUCKDB_LIB/
+  cp libduckdb/libduckdb.so $DUCKDB_DIR/lib
+  cp libduckdb/duckdb.* $DUCKDB_DIR/include
+
 #  # cache for future deploys
 #   echo "-----> Caching ImageMagick installation"
 #   cd $VENDOR_DIR
@@ -62,18 +60,10 @@ else
   tar xzf $CACHE_FILE -C $VENDOR_DIR
 fi
 
-PROFILE_PATH="$BUILD_DIR/.profile.d/duckdb.sh"
 ACTUAL_INSTALL_PATH="$HOME/vendor/duckdb"
-mkdir -p $(dirname $PROFILE_PATH)
-touch $PROFILE_PATH
-echo "export LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LIBRARY_PATH"  >> $PROFILE_PATH
-echo "export LD_LIBRARY_PATH=$ACTUAL_INSTALL_PATH/lib:\$LD_LIBRARY_PATH"  >> $PROFILE_PATH
-echo "export INCLUDE_PATH=$ACTUAL_INSTALL_PATH/include:\$INCLUDE_PATH"  >> $PROFILE_PATH
-echo "-----> DuckDB: $PROFILE_PATH"
-
 mkdir -p $ACTUAL_INSTALL_PATH/lib
 mkdir -p $ACTUAL_INSTALL_PATH/include
-cp -r $DUCKDB_LIB/* $ACTUAL_INSTALL_PATH/lib
-cp -r $DUCKDB_INCLUDE/* $ACTUAL_INSTALL_PATH/include
+cp -r $DUCKDB_DIR/lib/* $ACTUAL_INSTALL_PATH/lib
+cp -r $DUCKDB_DIR/include/* $ACTUAL_INSTALL_PATH/include
 
 echo "-----> DuckDB: Done"
