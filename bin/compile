@@ -53,7 +53,6 @@ mkdir -p $DUCKDB_INCLUDE
 
 # Download DuckDB C++ package
 DUCKDB_PACKAGE_URL="https://github.com/duckdb/duckdb/releases/download/v$DUCKDB_VERSION/libduckdb-linux-amd64.zip"
-echo "Downloading $DUCKDB_PACKAGE_URL" | output
 echo "Downloading $DUCKDB_PACKAGE_URL"
 curl -L $DUCKDB_PACKAGE_URL -o libduckdb.zip
 
@@ -65,7 +64,16 @@ cp libduckdb/libduckdb.so $DUCKDB_LIB/
 # Create .profile.d directory if it doesn't exist
 mkdir -p $BUILD_DIR/.profile.d
 
-echo "---BUNDLE_BUILD__DUCKDB----"
-echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB"
+echo "---BUNDLE_BUILD__DUCKDB----" | output
+echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB" | output
 echo "Installation successful" | output
-echo "Installation successful"
+if [ -d "$DUCKDB_LIB" ]; then
+  echo "Directory $DUCKDB_LIB exists." | output
+else
+  echo "Directory $DUCKDB_LIB does not exist." | output
+fi
+if [ -d "$DUCKDB_INCLUDE" ]; then
+  echo "Directory $DUCKDB_INCLUDE exists." | output
+else
+  echo "Directory $DUCKDB_INCLUDE does not exist." | output
+fi
