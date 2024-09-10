@@ -67,14 +67,13 @@ else
   tar xzf $CACHE_FILE -C $VENDOR_DIR
 fi
 
-topic "Writing profile script"
-  # Create .profile.d directory if it doesn't exist
-  mkdir -p $BUILD_DIR/.profile.d
-  cat <<EOF >$BUILD_DIR/.profile.d/001_duckdb.sh
+# Create .profile.d directory if it doesn't exist
+mkdir -p $BUILD_DIR/.profile.d
+cat <<EOF >$BUILD_DIR/.profile.d/001_duckdb.sh
     export LIBRARY_PATH="\$DUCKDB_LIB:\$LIBRARY_PATH"
     export INCLUDE_PATH="\$DUCKDB_INCLUDE:\$INCLUDE_PATH"
 EOF
-  chmod +x "$BUILD_DIR/.profile.d/001_duckdb.sh"
+chmod +x "$BUILD_DIR/.profile.d/001_duckdb.sh"
 
 
 
