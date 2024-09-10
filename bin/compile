@@ -1,7 +1,8 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # bin/compile <build-dir> <cache-dir> <env-dir>
 
-set -x
+# fail fast
+set -e
 
 header() {
   echo "" || true
