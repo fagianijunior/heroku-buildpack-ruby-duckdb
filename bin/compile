@@ -91,3 +91,4 @@ echo "-----> DuckDB has been installed to $ACTUAL_INSTALL_PATH" | indent
 # export INCLUDE_PATH="$BUILD_DIR/.heroku/vendor/include:$BUILD_DIR/.heroku/vendor/include/x86_64-linux-gnu:$INCLUDE_PATH"
 
 # export | grep -E -e ' (LIBRARY_PATH|INCLUDE_PATH)='  > "$LP_DIR/export"
+echo "-----> DuckDB: Done"
