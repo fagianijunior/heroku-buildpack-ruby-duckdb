@@ -30,7 +30,6 @@ echo "-----> Install Duckdb"
 
 if [ ! -f $CACHE_FILE ]; then
   echo "[duckdb-buildpack] Installing DuckDB from source" | indent
-  echo "[duckdb-buildpack] Current directory: $(pwd)" | indent
 
   mkdir -p $DUCKDB_LIB
   mkdir -p $DUCKDB_INCLUDE
@@ -44,10 +43,6 @@ if [ ! -f $CACHE_FILE ]; then
   unzip libduckdb.zip -d libduckdb
   cp libduckdb/duckdb.* $DUCKDB_INCLUDE/
   cp libduckdb/libduckdb.so $DUCKDB_LIB/
-
-
-  echo "---BUNDLE_BUILD__DUCKDB----" | indent
-  echo "--with-duckdb-include=$DUCKDB_INCLUDE --with-duckdb-lib=$DUCKDB_LIB" | indent
 #  # cache for future deploys
 #   echo "-----> Caching ImageMagick installation"
 #   cd $VENDOR_DIR
