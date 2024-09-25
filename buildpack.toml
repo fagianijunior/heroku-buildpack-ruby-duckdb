@@ -2,7 +2,7 @@ api = "0.5"
 
 [buildpack]
 id = "fagianijunior/ruby-duckdb"
-version = "0.0.1"
+version = "0.0.2"
 name = "Ruby DuckDB"
 homepage = "https://github.com/fagianijunior/heroku-buildpack-ruby-duckdb"
 description = "Install the ruby duckdb to your build."
