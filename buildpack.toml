@@ -1,0 +1,21 @@
+api = "0.5"
+
+[buildpack]
+id = "fagianijunior/ruby-duckdb"
+version = "0.0.1"
+name = "Ruby DuckDB"
+homepage = "https://github.com/fagianijunior/heroku-buildpack-ruby-duckdb"
+description = "Install the ruby duckdb to your build."
+keywords = ["ruby-duckdb", "buildpack", "heroku"]
+
+[[buildpack.licenses]]
+type = "MIT"
+
+[[stacks]]
+id = "heroku-18"
+
+[[stacks]]
+id = "heroku-20"
+
+[[stacks]]
+id = "io.buildpacks.stacks.bionic"
