@@ -1,15 +1,34 @@
-# Heroku buildpack for DuckDB
+# Ruby DuckDB Buildpack
 
-Push: [![Test](https://github.com/dataPlor/heroku-buildpack-ruby-duckdb/actions/workflows/test.yml/badge.svg?branch=master&event=push)](https://github.com/dataPlor/heroku-buildpack-ruby-duckdb/actions?query=workflow%3ATest+event%3Apush+branch%3Amaster)
+This buildpack installs DuckDB for your Ruby project using buildpacks.
 
-Scheduled: [![Test](https://github.com/dataPlor/heroku-buildpack-ruby-duckdb/actions/workflows/test.yml/badge.svg?branch=master&event=schedule)](https://github.com/dataPlor/heroku-buildpack-ruby-duckdb/actions?query=workflow%3ATest+event%3Aschedule+branch%3Amaster)
+## How to Use
 
-This is a [Heroku buildpack](https://devcenter.heroku.com/articles/buildpacks) for [DuckDB](https://duckdb.org/) required to work with gem [Ruby DuckDB](https://github.com/suketa/ruby-duckdb)
+To use this buildpack in your project, follow these steps:
 
-## Usage
-Add the buildpack to your Heroku app:
-```bash
-heroku buildpacks:add https://github.com/dataPlor/heroku-buildpack-ruby-duckdb.git
-heroku config:set BUNDLE_BUILD__DUCKDB="--with-duckdb-include=/app/vendor/duckdb/include --with-duckdb-lib=/app/vendor/duckdb/lib"
-```
-it should be added before the Ruby buildpack.
+1. Add the buildpack to your `project.toml` file in your project repository:
+
+   ```toml
+   [[build.buildpacks]]
+   uri = "fagianijunior/ruby-duckdb"
+   ```
+
+2. Add the following variable to your environment:
+
+   ```
+   BUNDLE_BUILD__DUCKDB="--with-duckdb-include=/app/vendor/duckdb/include --with-duckdb-lib=/app/vendor/duckdb/lib"
+   ```   ```
+
+3. Deploy your application as usual.
+
+## DuckDB Version
+
+This buildpack installs DuckDB version 1.1.0. If you need a different version, please open an issue or submit a pull request.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
